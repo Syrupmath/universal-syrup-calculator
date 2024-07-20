@@ -98,11 +98,11 @@ button:hover {
 @media (max-width: 768px) {
     .container {
         width: 100%;
-        max-width: 100%;
-        padding: 15px;
+        max-width: 95%; /* More narrow on mobile devices */
+        padding: 10px; /* Reduce padding on mobile devices */
         border: none;
-        margin: 0;
-        border-radius: 0;
+        margin: 0; /* Remove margins on mobile devices */
+        border-radius: 0; /* Remove border-radius for a cleaner look on mobile */
     }
 
     h1 {
