@@ -55,4 +55,80 @@ a:hover {
 }
 
 .input-group {
-    margin-bottom: 15
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px; /* Prevent auto-zoom on mobile devices */
+    margin-bottom: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 1em;
+    color: #555;
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+}
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1em;
+    color: #777;
+}
+
+/* Remove border and margins, adjust width and padding on mobile devices */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        max-width: 95%; /* More narrow on mobile devices */
+        padding: 10px; /* Reduce padding on mobile devices */
+        border: none;
+        margin: 0; /* Remove margins on mobile devices */
+        border-radius: 0; /* Remove border-radius for a cleaner look on mobile */
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    p {
+        font-size: 0.9em;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
