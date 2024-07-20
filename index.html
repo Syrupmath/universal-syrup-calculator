@@ -29,6 +29,7 @@
             const targetBrix2to1 = 0.6667;
             const targetBrix1to1 = 0.5;
             let resultText = '';
+            let additionType = ''; // To store whether we need to add sugar or water
 
             if (isNaN(weight) || isNaN(brix)) {
                 resultText = 'Please enter valid numbers for weight and Brix.';
@@ -40,9 +41,11 @@
                 if (brix < targetBrix2to1) {
                     additionalSugar2to1 = (targetBrix2to1 * weight - brix * weight) / (1 - targetBrix2to1);
                     resultText += `To make a 2:1 syrup, add ${additionalSugar2to1.toFixed(2)} grams of sugar.<br>`;
+                    additionType = 'sugar';
                 } else if (brix > targetBrix2to1) {
                     additionalWater2to1 = (brix * weight - targetBrix2to1 * weight) / targetBrix2to1;
                     resultText += `To make a 2:1 syrup, add ${additionalWater2to1.toFixed(2)} grams of water.<br>`;
+                    additionType = 'water';
                 } else {
                     resultText += 'Your liquid already has the perfect Brix for a 2:1 syrup.<br>';
                 }
@@ -54,14 +57,22 @@
                 if (brix < targetBrix1to1) {
                     additionalSugar1to1 = (targetBrix1to1 * weight - brix * weight) / (1 - targetBrix1to1);
                     resultText += `To make a 1:1 syrup, add ${additionalSugar1to1.toFixed(2)} grams of sugar.`;
+                    additionType = 'sugar';
                 } else if (brix > targetBrix1to1) {
                     additionalWater1to1 = (brix * weight - targetBrix1to1 * weight) / targetBrix1to1;
                     resultText += `To make a 1:1 syrup, add ${additionalWater1to1.toFixed(2)} grams of water.`;
+                    additionType = 'water';
                 } else {
                     resultText += 'Your liquid already has the perfect Brix for a 1:1 syrup.';
                 }
 
-                resultText += '<br><br>Heat your liquid and the additional water or sugar over gentle heat and stir until everything is combined.<br>';
+                // Add contextualized instructions based on the addition type
+                if (additionType === 'sugar') {
+                    resultText += '<br><br>Heat your liquid and the additional sugar over gentle heat and stir until everything is combined.<br>';
+                } else if (additionType === 'water') {
+                    resultText += '<br><br>Heat your liquid and the additional water over gentle heat and stir until everything is combined.<br>';
+                }
+
                 resultText += 'Allow mixture to cool, store in squeeze bottles, label, and refrigerate.';
             }
 
