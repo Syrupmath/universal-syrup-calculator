@@ -13,7 +13,8 @@ body {
     width: 90%;
     max-width: 500px;
     padding: 20px;
-    margin: 20px auto;
+    padding-top: 10px; /* Reduced top padding */
+    margin: 10px auto; /* Reduced top margin */
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: white;
