@@ -106,12 +106,14 @@ button:hover {
     height: 1px;
     margin: 20px 0;
     background: #ccc;
+    display: none; /* Initially hidden */
 }
 
 footer {
     text-align: center;
     font-size: 1em;
     color: #777;
+    margin-top: 20px;
 }
 
 /* Remove border and margins, adjust width and padding on mobile devices */
