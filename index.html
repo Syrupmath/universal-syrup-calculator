@@ -30,7 +30,7 @@
         <button id="calculateButton" onclick="calculate()">Calculate</button>
         <div class="result" id="result"></div>
 
-        <hr class="divider">
+        <hr class="divider" id="divider">
 
         <footer>
             <p>If you'd like to support the site, consider <a href="https://jeffreymorgenthaler.com/book/" target="_blank">buying a signed copy</a> of one of my books on cocktails and bartending!</p>
@@ -43,6 +43,7 @@
             const brixInput = document.getElementById('brix');
             const weightError = document.getElementById('weightError');
             const brixError = document.getElementById('brixError');
+            const divider = document.getElementById('divider');
             const weight = parseFloat(weightInput.value);
             const brix = parseFloat(brixInput.value);
             const brixDecimal = brix / 100;
@@ -115,6 +116,7 @@
             }
 
             document.getElementById('result').innerHTML = resultText;
+            divider.style.display = 'block'; // Show the divider after displaying results
         }
 
         // Add event listener to trigger the calculate function when Enter key is pressed
