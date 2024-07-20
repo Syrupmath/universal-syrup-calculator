@@ -19,10 +19,12 @@
         <div class="input-group">
             <label for="weight">Weight of Liquid (grams):</label>
             <input type="number" id="weight" required>
+            <span class="error" id="weightError"></span>
         </div>
         <div class="input-group">
             <label for="brix">Initial Brix (%):</label>
             <input type="number" id="brix" required>
+            <span class="error" id="brixError"></span>
         </div>
         <button id="calculateButton" onclick="calculate()">Calculate</button>
         <div class="result" id="result"></div>
@@ -30,26 +32,49 @@
 
     <script>
         function calculate() {
-            const weight = parseFloat(document.getElementById('weight').value);
-            const brix = parseFloat(document.getElementById('brix').value) / 100;
+            const weightInput = document.getElementById('weight');
+            const brixInput = document.getElementById('brix');
+            const weightError = document.getElementById('weightError');
+            const brixError = document.getElementById('brixError');
+            const weight = parseFloat(weightInput.value);
+            const brix = parseFloat(brixInput.value);
+            const brixDecimal = brix / 100;
             const targetBrix2to1 = 0.6667;
             const targetBrix1to1 = 0.5;
             let resultText = '';
             let additionType = ''; // To store whether we need to add sugar or water
+            let valid = true;
 
-            if (isNaN(weight) || isNaN(brix)) {
+            // Clear previous error messages
+            weightError.textContent = '';
+            brixError.textContent = '';
+
+            if (isNaN(weight) || weight <= 0) {
+                weightError.textContent = 'Please enter a valid weight.';
+                valid = false;
+            }
+            if (isNaN(brix) || brix <= 0 || brix > 100) {
+                brixError.textContent = 'Please enter a valid Brix value (0-100).';
+                valid = false;
+            }
+
+            if (!valid) {
+                return;
+            }
+
+            if (isNaN(weight) || isNaN(brixDecimal)) {
                 resultText = 'Please enter valid numbers for weight and Brix.';
             } else {
                 // For 2:1 Syrup
                 let additionalSugar2to1 = 0;
                 let additionalWater2to1 = 0;
 
-                if (brix < targetBrix2to1) {
-                    additionalSugar2to1 = (targetBrix2to1 * weight - brix * weight) / (1 - targetBrix2to1);
+                if (brixDecimal < targetBrix2to1) {
+                    additionalSugar2to1 = (targetBrix2to1 * weight - brixDecimal * weight) / (1 - targetBrix2to1);
                     resultText += `<p>To make a 2:1 syrup, add <span class="highlight">${additionalSugar2to1.toFixed(2)} grams</span> of sugar.</p>`;
                     additionType = 'sugar';
-                } else if (brix > targetBrix2to1) {
-                    additionalWater2to1 = (brix * weight - targetBrix2to1 * weight) / targetBrix2to1;
+                } else if (brixDecimal > targetBrix2to1) {
+                    additionalWater2to1 = (brixDecimal * weight - targetBrix2to1 * weight) / targetBrix2to1;
                     resultText += `<p>To make a 2:1 syrup, add <span class="highlight">${additionalWater2to1.toFixed(2)} grams</span> of water.</p>`;
                     additionType = 'water';
                 } else {
@@ -60,12 +85,12 @@
                 let additionalSugar1to1 = 0;
                 let additionalWater1to1 = 0;
 
-                if (brix < targetBrix1to1) {
-                    additionalSugar1to1 = (targetBrix1to1 * weight - brix * weight) / (1 - targetBrix1to1);
+                if (brixDecimal < targetBrix1to1) {
+                    additionalSugar1to1 = (targetBrix1to1 * weight - brixDecimal * weight) / (1 - targetBrix1to1);
                     resultText += `<p>To make a 1:1 syrup, add <span class="highlight">${additionalSugar1to1.toFixed(2)} grams</span> of sugar.</p>`;
                     additionType = 'sugar';
-                } else if (brix > targetBrix1to1) {
-                    additionalWater1to1 = (brix * weight - targetBrix1to1 * weight) / targetBrix1to1;
+                } else if (brixDecimal > targetBrix1to1) {
+                    additionalWater1to1 = (brixDecimal * weight - targetBrix1to1 * weight) / targetBrix1to1;
                     resultText += `<p>To make a 1:1 syrup, add <span class="highlight">${additionalWater1to1.toFixed(2)} grams</span> of water.</p>`;
                     additionType = 'water';
                 } else {
