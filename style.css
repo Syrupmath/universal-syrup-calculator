@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 body {
     font-family: 'Roboto', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #ebe6ea; /* Changed background color */
+    background-color: #ebfcef; /* Changed background color */
     color: #333;
     line-height: 1.6;
 }
@@ -24,8 +23,7 @@ body {
 
 h1 {
     text-align: center;
-    font-family: 'Oswald', sans-serif; /* Changed font */
-    font-size: 2.5em;
+    font-size: 2.7em; /* Increased font size */
     margin-bottom: 0.2em;
     font-weight: 700;
 }
@@ -33,7 +31,7 @@ h1 {
 .author {
     text-align: center;
     margin-top: -0.2em;
-    font-size: 1em;
+    font-size: 0.9em; /* Reduced font size */
     color: #777;
 }
 
