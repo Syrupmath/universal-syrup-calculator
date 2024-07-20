@@ -63,3 +63,10 @@ button:hover {
 .result {
     margin-top: 20px;
 }
+
+/* Remove border on mobile devices */
+@media (max-width: 768px) {
+    .container {
+        border: none;
+    }
+}
