@@ -4,7 +4,7 @@ body {
     font-family: 'Roboto', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #ebfcef; /* Changed background color */
+    background-color: #edebed; /* Changed background color */
     color: #333;
     line-height: 1.6;
 }
@@ -30,8 +30,8 @@ h1 {
 
 .author {
     text-align: center;
-    margin-top: -0.2em;
-    font-size: 0.9em; /* Reduced font size */
+    margin-top: -0.4em;
+    font-size: 0.8em; /* Reduced font size */
     color: #777;
 }
 
