@@ -61,6 +61,11 @@ button:hover {
     margin-top: 20px;
 }
 
+.error {
+    color: red;
+    font-size: 12px;
+}
+
 /* Remove border on mobile devices */
 @media (max-width: 768px) {
     .container {
