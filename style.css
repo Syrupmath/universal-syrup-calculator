@@ -71,7 +71,8 @@ button:hover {
 @media (max-width: 768px) {
     .container {
         width: 95%;
-        max-width: 375px; /* More narrow on mobile devices */
+        max-width: 350px; /* More narrow on mobile devices */
+        padding: 15px; /* Reduce padding on mobile devices */
         border: none;
         margin-top: 0; /* Remove top margin on mobile devices */
     }
