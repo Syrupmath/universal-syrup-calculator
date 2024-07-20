@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocktail ABV Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .ingredient {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .ingredient input {
+            width: 25%;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+
+        select {
+            margin: 10px;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cocktail ABV Calculator</h1>
+        <div id="ingredients">
+            <div class="ingredient">
+                <input type="text" class="name" placeholder="Ingredient Name">
+                <input type="number" class="volume" placeholder="Volume (oz)" min="0" step="0.01">
+                <input type="number" class="abv" placeholder="ABV (%)" min="0" step="0.1">
+                <button class="remove">Remove</button>
+            </div>
+        </div>
+        <button id="add-ingredient">Add Ingredient</button>
+        <select id="dilution">
+            <option value="0">No Dilution</option>
+            <option value="10">Built in Glass (10%)</option>
+            <option value="20">Stirred (20%)</option>
+            <option value="25">Shaken (25%)</option>
+        </select>
+        <button id="calculate-abv">Calculate ABV</button>
+        <div id="result">
+            <h2>Final ABV: <span id="final-abv">0.00</span>%</h2>
+        </div>
+    </div>
+    <script>
+        document.getElementById('add-ingredient').addEventListener('click', addIngredient);
+        document.getElementById('calculate-abv').addEventListener('click', calculateABV);
+
+        function addIngredient() {
+            const ingredientDiv = document.createElement('div');
+            ingredientDiv.classList.add('ingredient');
+
+            const nameInput = document.createElement('input');
+            nameInput.type = 'text';
+            nameInput.classList.add('name');
+            nameInput.placeholder = 'Ingredient Name';
+
+            const volumeInput = document.createElement('input');
+            volumeInput.type = 'number';
+            volumeInput.classList.add('volume');
+            volumeInput.placeholder = 'Volume (oz)';
+            volumeInput.min = '0';
+            volumeInput.step = '0.01';
+
+            const abvInput = document.createElement('input');
+            abvInput.type = 'number';
+            abvInput.classList.add('abv');
+            abvInput.placeholder = 'ABV (%)';
+            abvInput.min = '0';
+            abvInput.step = '0.1';
+
+            const removeButton = document.createElement('button');
+            removeButton.classList.add('remove');
+            removeButton.innerText = 'Remove';
+            removeButton.addEventListener('click', () => ingredientDiv.remove());
+
+            ingredientDiv.appendChild(nameInput);
+            ingredientDiv.appendChild(volumeInput);
+            ingredientDiv.appendChild(abvInput);
+            ingredientDiv.appendChild(removeButton);
+
+            document.getElementById('ingredients').appendChild(ingredientDiv);
+        }
+
+        function calculateABV() {
+            const ingredients = document.querySelectorAll('.ingredient');
+            let totalVolume = 0;
+            let totalAlcohol = 0;
+
+            ingredients.forEach(ingredient => {
+                const volume = parseFloat(ingredient.querySelector('.volume').value);
+                const abv = parseFloat(ingredient.querySelector('.abv').value);
+
+                if (!isNaN(volume) && !isNaN(abv)) {
+                    totalVolume += volume;
+                    totalAlcohol += volume * (abv / 100);
+                }
+            });
+
+            const dilution = parseFloat(document.getElementById('dilution').value) / 100;
+            totalVolume += totalVolume * dilution;
+
+            const finalABV = totalAlcohol / totalVolume * 100;
+            document.getElementById('final-abv').innerText = isNaN(finalABV) ? '0.00' : finalABV.toFixed(2);
+        }
+    </script>
+</body>
+</html>
