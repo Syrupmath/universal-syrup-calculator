@@ -73,5 +73,6 @@ button:hover {
         width: 95%;
         max-width: 400px; /* More narrow on mobile devices */
         border: none;
+        margin-top: 0; /* Remove top margin on mobile devices */
     }
 }
