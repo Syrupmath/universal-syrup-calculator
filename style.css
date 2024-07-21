@@ -124,7 +124,7 @@ footer {
         max-width: 95%; /* More narrow on mobile devices */
         padding: 10px; /* Reduce padding on mobile devices */
         border: none;
-        margin: 0; /* Remove margins on mobile devices */
+        margin: 0 5%; /* Added small margins on the left and right */        
         border-radius: 0; /* Remove border-radius for a cleaner look on mobile */
     }
 
