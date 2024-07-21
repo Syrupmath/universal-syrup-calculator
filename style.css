@@ -120,11 +120,11 @@ footer {
 /* Remove border and margins, adjust width and padding on mobile devices */
 @media (max-width: 768px) {
     .container {
-        width: 90%; /* Reduced the width */
-        max-width: 90%; /* More narrow on mobile devices */
+        width: 90%; /* Ensure the container takes up 90% of the width */
+        max-width: none; /* Remove max-width for mobile */
         padding: 10px; /* Reduce padding on mobile devices */
         border: none;
-        margin: 0 5%; /* Added small margins on the left and right */
+        margin: 10px auto; /* Center the container with auto margins */
         border-radius: 0; /* Remove border-radius for a cleaner look on mobile */
     }
 
