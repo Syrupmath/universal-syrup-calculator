@@ -120,7 +120,7 @@ footer {
 /* Remove border and margins, adjust width and padding on mobile devices */
 @media (max-width: 768px) {
     .container {
-        width: 90%;
+        width: 100%;
         max-width: 95%; /* More narrow on mobile devices */
         padding: 10px; /* Reduce padding on mobile devices */
         border: none;
