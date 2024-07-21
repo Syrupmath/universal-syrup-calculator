@@ -4,7 +4,7 @@ body {
     font-family: 'Roboto', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f5ec9a; /* Changed background color */
+    background-color: #ebfcef; /* Changed background color */
     color: #333;
     line-height: 1.6;
 }
@@ -23,7 +23,7 @@ body {
 
 h1 {
     text-align: center;
-    font-size: 2.4em; /* Increased font size */
+    font-size: 2.7em; /* Increased font size */
     margin-bottom: 0.2em;
     font-weight: 700;
 }
@@ -120,11 +120,11 @@ footer {
 /* Remove border and margins, adjust width and padding on mobile devices */
 @media (max-width: 768px) {
     .container {
-        width: 100%;
+        width: 90%; /* Reduced the width */
         max-width: 90%; /* More narrow on mobile devices */
         padding: 10px; /* Reduce padding on mobile devices */
         border: none;
-        margin: 0;        
+        margin: 0 5%; /* Added small margins on the left and right */
         border-radius: 0; /* Remove border-radius for a cleaner look on mobile */
     }
 
