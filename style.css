@@ -121,7 +121,7 @@ footer {
 @media (max-width: 768px) {
     .container {
         width: 100%;
-        max-width: 95%; /* More narrow on mobile devices */
+        max-width: 90%; /* More narrow on mobile devices */
         padding: 10px; /* Reduce padding on mobile devices */
         border: none;
         margin: 0 5%; /* Added small margins on the left and right */        
