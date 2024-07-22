@@ -74,7 +74,7 @@
                 weightError.textContent = 'Please enter a valid weight.';
                 valid = false;
             }
-            if (isNaN(brix) || brix <= 0 || brix > 100) {
+            if (isNaN(brix) || brix < 0 || brix > 100) {
                 brixError.textContent = 'Please enter a valid Brix value (0-100).';
                 valid = false;
             }
