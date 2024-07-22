@@ -23,7 +23,8 @@ body {
 
 h1 {
     text-align: center;
-    font-size: 2.7em; /* Increased font size */
+    font-size: 2.5em; /* Reduced font size */
+    line-height: 1.2; /* Tightened line spacing */
     margin-bottom: 0.2em;
     font-weight: 700;
 }
