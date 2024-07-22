@@ -59,8 +59,9 @@
             const weight = parseFloat(weightInput.value);
             const brix = parseFloat(brixInput.value);
             const brixDecimal = brix / 100;
-            const targetBrix2to1 = 0.6667;
+            const targetBrix2to1 = 2/3;
             const targetBrix1to1 = 0.5;
+            const brixTolerance = 0.005; // If brix is within 0.5 brix of target, no addition is needed
             let resultText = '';
             let additionType = ''; // To store whether we need to add sugar or water
             let valid = true;
@@ -88,28 +89,25 @@
                 // For 2:1 Syrup
                 let additionalSugar2to1 = 0;
                 let additionalWater2to1 = 0;
-
-                if (brixDecimal < targetBrix2to1) {
+                if (brixDecimal + brixTolerance < targetBrix2to1) {
                     additionalSugar2to1 = (targetBrix2to1 * weight - brixDecimal * weight) / (1 - targetBrix2to1);
                     resultText += `<p>To make a <b>2:1</b> syrup, add <span class="highlight">${additionalSugar2to1.toFixed(2)} grams</span> of sugar.</p>`;
                     additionType = 'sugar';
-                } else if (brixDecimal > targetBrix2to1) {
+                } else if (brixDecimal - brixTolerance > targetBrix2to1) {
                     additionalWater2to1 = (brixDecimal * weight - targetBrix2to1 * weight) / targetBrix2to1;
                     resultText += `<p>To make a <b>2:1</b> syrup, add <span class="highlight">${additionalWater2to1.toFixed(2)} grams</span> of water.</p>`;
                     additionType = 'water';
                 } else {
                     resultText += '<p>Your liquid already has the perfect Brix for a <b>2:1</b> syrup.</p>';
                 }
-
                 // For 1:1 Syrup
                 let additionalSugar1to1 = 0;
                 let additionalWater1to1 = 0;
-
-                if (brixDecimal < targetBrix1to1) {
+                if (brixDecimal + brixTolerance < targetBrix1to1) {
                     additionalSugar1to1 = (targetBrix1to1 * weight - brixDecimal * weight) / (1 - targetBrix1to1);
                     resultText += `<p>To make a <b>1:1</b> syrup, add <span class="highlight">${additionalSugar1to1.toFixed(2)} grams</span> of sugar.</p>`;
                     additionType = 'sugar';
-                } else if (brixDecimal > targetBrix1to1) {
+                } else if (brixDecimal - brixTolerance > targetBrix1to1) {
                     additionalWater1to1 = (brixDecimal * weight - targetBrix1to1 * weight) / targetBrix1to1;
                     resultText += `<p>To make a <b>1:1</b> syrup, add <span class="highlight">${additionalWater1to1.toFixed(2)} grams</span> of water.</p>`;
                     additionType = 'water';
