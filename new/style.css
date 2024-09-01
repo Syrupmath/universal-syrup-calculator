@@ -133,8 +133,8 @@ input {
 	
 .instructions {
     font-family: Arial, sans-serif; /* Keep the same font family */
-    font-size: .8rem;
-    font-weight: 400;
+    font-size: .9rem;
+    font-weight: 600;
     color: #000; /* Set the text color to black */
     margin: 0; 
     text-align: center;
@@ -163,7 +163,7 @@ footer {
 /* Remove border and margins, adjust width and padding on mobile devices */
 @media (max-width: 768px) {
     .container {
-        width: 90%; /* Ensure the container takes up 90% of the width */
+        width: 95%; /* Ensure the container takes up 90% of the width */
         max-width: none; /* Remove max-width for mobile */
         padding: 15px; /* Reduce padding on mobile devices
         border: none;
