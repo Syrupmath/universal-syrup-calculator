@@ -123,14 +123,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Set the contextual instructions based on the type of addition needed
             let instructionText = '';
             if (sugar1to1Type === 'sugar' || sugar2to1Type === 'sugar') {
-                instructionText = 'Heat your liquid and the additional sugar over gentle heat on a stovetop or in a microwave, and stir just until the sugar is dissolved and everything is combined.';
+                instructionText = '<p id="instruction-1">Heat your liquid and the additional sugar over gentle heat on a stovetop or in a microwave, and stir just until the sugar is dissolved and everything is combined.</p>';
             } else if (sugar1to1Type === 'water' || sugar2to1Type === 'water') {
-                instructionText = 'Heat your liquid and the additional water over gentle heat on a stovetop or in a microwave, and stir just until everything is combined.';
+                instructionText = '<p id="instruction-1">Heat your liquid and the additional water over gentle heat on a stovetop or in a microwave, and stir just until everything is combined.</p>';
             } else {
                 instructionText = 'Your liquid already has the correct Brix for the syrup.';
             }
-            instructionText += '<p>Allow the mixture to cool at room temperature, then portion into <a href="https://amzn.to/3XqhJVn" target="_blank" aria-label="Link to buy squeeze bottles, opens in a new window">squeeze bottles</a>, and clearly <a href="https://amzn.to/4g10rFD" target="_blank" aria-label="Link to buy food labels, opens in a new window">label and date</a> all bottles.</p>';
-            instructionText += '<p>Store 1:1 syrups in the refrigerator for up to 1 month and 2:1 syrups for up to 6 weeks. Check for signs of spoilage before use. When in doubt, always discard and make a new batch.</p>';
+            instructionText += '<p id="instruction-2">Allow the mixture to cool at room temperature, then portion into <a href="https://amzn.to/3XqhJVn" target="_blank" aria-label="Link to buy squeeze bottles, opens in a new window">squeeze bottles</a>, and clearly <a href="https://amzn.to/4g10rFD" target="_blank" aria-label="Link to buy food labels, opens in a new window">label and date</a> all bottles.</p>';
+            instructionText += '<p id="instruction-3">Store 1:1 syrups in the refrigerator for up to 1 month and 2:1 syrups for up to 6 weeks. Check for signs of spoilage before use. When in doubt, always discard and make a new batch.</p>';
             instructions.innerHTML = `<p>${instructionText}</p>`;
         }
     }
