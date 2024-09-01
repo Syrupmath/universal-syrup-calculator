@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Spicy+Rice&display=swap');
 
 body {
     font-family: 'Roboto', Arial, sans-serif;
@@ -7,14 +9,19 @@ body {
     background-color: #f5ec9a; /* Changed background color */
     color: #333;
     line-height: 1.6;
+	background: url('background.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: center;
+
 }
 
 .container {
-    width: 90%;
+    width: 95%;
     max-width: 500px;
     padding: 20px;
-    padding-top: 10px; /* Reduced top padding */
-    margin: 10px auto; /* Reduced top margin */
+    margin: 15px auto 5px;
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: white;
@@ -22,25 +29,49 @@ body {
 }
 
 h1 {
+    font-family: "Spicy Rice", serif;
+    font-size: 3.5rem;
+    font-weight: 400;
+    line-height: .8;
+    color: #ff6347;
     text-align: center;
-    font-size: 2.5em; /* Reduced font size */
-    line-height: 1.2; /* Tightened line spacing */
-    margin-bottom: 0.2em;
-    font-weight: 700;
+    padding: 0;
+    margin: 0;
 }
 
+h2 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.3rem; /* Slightly smaller than the default */
+    margin-bottom: 0.75rem; /* Reduce space below the title */
+    font-weight: 800; /* Heavy font weight for a modern look */
+    color: #333; /* A slightly softer black/gray color */
+    letter-spacing: 0.5px; /* Add slight letter spacing for a modern feel */
+    margin: 0;
+}
+
+#header p {
+    font-family: Arial, sans-serif; /* Keep the same font family */
+    font-size: .8rem; /* Slightly smaller font for the byline */
+    font-weight: 400; /* Normal weight for the byline */
+    color: #000; /* Set the text color to black */
+    margin: 0; /* Adjust spacing between title and byline */
+    text-align: center;
+	}
+	
+.recipe-step p {
+    font-size: .75rem;
+    margin-top: 5px;
+	}
+	
+.row .recipe-step h2,
+.row .recipe-step p {
+	margin-left: 15px;
+	margin-right: 15px;
+	}
+	
 .author {
-    text-align: center;
-    margin-top: -0.2em;
-    font-size: 0.9em; /* Reduced font size */
-    color: #777;
-}
-
-p {
-    margin-bottom: 1em;
-    font-size: 1em;
-    color: #555;
-}
+	padding-bottom: 15px;
+	}
 
 a {
     color: #007BFF;
@@ -57,88 +88,99 @@ a:hover {
 }
 
 .input-group {
-    margin-bottom: 15px;
-}
-
-label {
-    display: block;
     margin-bottom: 5px;
-    font-weight: bold;
+    padding-bottom: 0px;
 }
 
-input {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px; /* Prevent auto-zoom on mobile devices */
-    margin-bottom: 5px;
+#calculateButton {
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 10px 20px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    margin-top: 25px;
 }
 
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
+#calculateButton:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
 }
 
-button:hover {
-    background-color: #218838;
+#results {
+    margin-top: 1.5em; /* Adjust the value as needed */
+    margin-bottom: 1.5em;
 }
 
-.result {
-    margin-top: 20px;
-    font-size: 1em;
-    color: #555;
+.card-header {
+    font-size: 1rem;  /* Increase the font size */
+    letter-spacing: 1px;
+    font-weight: 900; /* Make the text bold */
 }
 
+#sugar1to1, #sugar2to1 {
+	font-size: 1.5rem;
+	color: #ff6347;
+	margin-bottom: 1rem;
+	}
+	
+#instruction-1 {
+    font-family: Arial, sans-serif; /* Keep the same font family */
+    font-size: .9rem;
+    font-weight: 400;
+    color: #000; /* Set the text color to black */
+    text-align: center;
+	}
+	
+#instruction-2 {
+    font-family: Arial, sans-serif; /* Keep the same font family */
+    font-size: .9rem;
+    font-weight: 600;
+    color: #000; /* Set the text color to black */
+    text-align: center;
+	}
+	
+#instruction-3 {
+    font-family: Arial, sans-serif; /* Keep the same font family */
+    font-size: .9rem;
+    font-weight: 400;
+    font-style: italic;
+    color: #000; /* Set the text color to black */
+    text-align: center;
+	}
+
+/* Error message styling */
 .error {
     color: red;
-    font-size: 0.9em;
+    font-size: 0.8em;  /* Adjust font size if necessary */
+    margin-left: 5px;
+    display: block;  /* Ensure it displays as a block element */
 }
 
-.divider {
-    border: 0;
-    height: 1px;
-    margin: 20px 0;
-    background: #ccc;
-    display: none; /* Initially hidden */
+hr {
+    margin: 2rem 0;
 }
 
 footer {
     text-align: center;
-    font-size: 1em;
-    color: #777;
-    margin-top: 20px;
-}
+    font-family: Arial, sans-serif; /* Keep the same font family */
+    font-size: .8rem; /* Slightly smaller font for the byline */
+    font-weight: 400; /* Normal weight for the byline */
+    color: #000; /* Set the text color to black */
+    }
 
 /* Remove border and margins, adjust width and padding on mobile devices */
 @media (max-width: 768px) {
     .container {
-        width: 90%; /* Ensure the container takes up 90% of the width */
+        width: 95%; /* Ensure the container takes up 90% of the width */
         max-width: none; /* Remove max-width for mobile */
-        padding: 10px; /* Reduce padding on mobile devices */
+        padding: 15px; /* Reduce padding on mobile devices
         border: none;
         margin: 10px auto; /* Center the container with auto margins */
-        border-radius: 0; /* Remove border-radius for a cleaner look on mobile */
+        border-radius: 5px;
+    }
+    
+.card {
+	margin-bottom: 25px; /* Add desired space between cards */
     }
 
-    h1 {
-        font-size: 1.5em;
-    }
-
-    p {
-        font-size: 0.9em;
-    }
-
-    button {
-        font-size: 14px;
-        padding: 10px;
-    }
 }

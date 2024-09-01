@@ -5,150 +5,126 @@
     <title>Universal Syrup Calculator</title>
     <meta name="description" content="Universal Syrup Calculator by Jeffrey Morgenthaler helps you make perfect 2:1 and 1:1 sugar syrups. Calculate the right amount of sugar or water based on your liquid's weight and Brix.">
     <meta name="keywords" content="syrup calculator, sugar syrup, 2:1 syrup, 1:1 syrup, Jeffrey Morgenthaler, cocktail syrup">
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="manifest" href="/manifest.json">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:title" content="Universal Syrup Calculator by Jeffrey Morgenthaler">
-    <meta property="og:description" content="Calculate the right amount of sugar or water to make perfect 2:1 and 1:1 sugar syrups.">
-    <meta property="og:image" content="URL_TO_IMAGE">
-    <meta property="og:url" content="YOUR_WEBSITE_URL">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Universal Syrup Calculator by Jeffrey Morgenthaler">
-    <meta name="twitter:description" content="Calculate the right amount of sugar or water to make perfect 2:1 and 1:1 sugar syrups.">
-    <meta name="twitter:image" content="URL_TO_IMAGE">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
 </head>
 <body>
+
+
     <div class="container">
-        <h1>Universal Syrup Calculator</h1>
-        <p class="author">by <a href="https://jeffreymorgenthaler.com/universal-syrup-calculator/" target="_blank" aria-label="Link to my website, opens in a new window">Jeffrey Morgenthaler</a></p>
-        <p>This tool helps you calculate the amount of sugar or water needed to make perfect <b>2:1</b> or <b>1:1</b> sugar syrups from <em>any</em> liquid - fruit and vegetable juices, milks, and liquid sugars such as honey or agave syrup.</p>
-        <p><em>To get started, weigh your liquid with a <a href="https://amzn.to/3SgPzZM" target="_blank" aria-label="Link to buy, opens in a new window">digital scale</a> and measure its Brix (sugar content percentage) with an <a href="https://amzn.to/46cc4EW" target="_blank" aria-label="Link to buy, opens in a new window">optical refractometer</a>. The calculator will tell you how much additional sugar or water you need to add to achieve your desired syrup consistency.</em></p>
+    
+    <div id="header">
+    <p>The</p>
+    <h1>Universal Syrup Calculator</h1>
+    <p class="author">by <a href="https://jeffreymorgenthaler.com/universal-syrup-calculator/" target="_blank" aria-label="Link to my website, opens in a new window">Jeffrey Morgenthaler</a></p>
+    <p>This tool helps you calculate the amount of sugar or water needed to make perfect <b>1:1</b> or <b>2:1</b> sugar syrups from <em>any</em> liquid - fruit and vegetable juices, milks, and even liquid sugars such as honey or agave nectar. <a href="https://youtu.be/glE4A1I0q9I?si=YiJx6yE7gllNssg1" target="_blank" aria-label="Link to my website, opens in a new window">Click here</a> for a video walkthrough of the process.</p>
+        </div>
         
-        <div class="input-group">
-            <label for="weight">Weight of Liquid (grams):</label>
-            <input type="number" id="weight" required>
-            <span class="error" id="weightError"></span>
+        <hr />
+        
+        <div class="recipe-step"> 
+        <h2>1: Weigh Your Liquid</h2>
+        <p>To begin, weigh your liquid with a <a href="https://amzn.to/3SgPzZM" target="_blank" aria-label="Link to buy digital scale, opens in a new window">digital scale</a> and enter that value below.
+<div class="input-group">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Liquid Weight</span>
+    </div>
+    <input type="number" class="form-control" id="weight" aria-label="Weight of Liquid" aria-describedby="inputGroup-sizing-default" required>
+    <div class="input-group-append">
+        <select class="custom-select" id="unit">
+            <option value="grams">grams</option>
+            <option value="ounces">ounces</option>
+            <option value="kilograms">kilograms</option>
+            <option value="pounds">pounds</option>
+        </select>
+    </div>
+</div>
+<span class="error" id="weightError"></span>
+</div>
+        
+        <hr />
+        
+	<div class="recipe-step"> 
+	<h2>2: Measure Existing Sugar</h2>
+	<p>Use an <a href="https://amzn.to/46cc4EW" target="_blank" aria-label="Link to buy optical refractometer, opens in a new window">optical refractometer</a> to measure your liquid's existing sugar content percentage (Brix) and enter that value below. Then, click the 'Calculate' button to calculate your recipe.</p>
+	<div class="input-group">
+	<div class="input-group-prepend">
+	<span class="input-group-text" id="inputGroup-sizing-default">Initial Brix</span>
+	</div>
+	<input type="number" class="form-control" id="brix" aria-label="Initial Brix" aria-describedby="inputGroup-sizing-default" required>
+	<div class="input-group-append">
+	<span class="input-group-text">%</span>
+	</div>
+	</div>
+	<span class="error" id="brixError"></span>
+	</div>
+        
+<button id="calculateButton" class="btn btn-primary btn-lg btn-block shadow rounded">Calculate</button>        
+       
+	
+<div id="results" class="row d-none">
+<div class="recipe-step"> 
+	<h2>3: Assemble Your Syrup</h2>
+	<p>Using the quantities below, prepare your syrup according to the instructions that follow.</p>
+	</div>
+    <div class="col-md-6">
+        <div class="card text-center">
+            <div class="card-header">
+                FOR 1:1 SYRUP
+            </div>
+            <div class="card-body">
+                    <p id="add1to1Text"></p>
+                <h2 id="sugar1to1">xx grams</h2>
+                <p id="sugar1to1Type">water</p>
+            </div>
         </div>
-        <div class="input-group">
-            <label for="brix">Initial Brix (%):</label>
-            <input type="number" id="brix" required>
-            <span class="error" id="brixError"></span>
+    </div>
+    <div class="col-md-6">
+        <div class="card text-center">
+            <div class="card-header">
+                FOR 2:1 SYRUP
+            </div>
+            <div class="card-body">
+                <p></p>
+                <h2 id="sugar2to1">xx grams</h2>
+                <p id="sugar2to1Type">sugar</p>
+            </div>
         </div>
-        <button id="calculateButton" onclick="calculate()">Calculate</button>
-        <div class="result" id="result"></div>
+    </div>
+</div>
 
-        <hr class="divider" id="divider">
+<!-- Instructions Section -->
+<div class="instructions d-none" id="instructions">
+<p>Instructions Will Appear Here</p>
+<hr />
+</div>
 
-        <footer>
-            <p>If you'd like to support the site, consider <a href="https://jeffreymorgenthaler.com/book/" target="_blank" aria-label="Link to buy, opens in a new window">buying a signed copy</a> of one of my books on cocktails and bartending, there's tons more helpful advice for making drinks in there!</p>
-        </footer>
+       <hr /> 
+
+
+<footer>
+<p>If you found this tool useful and would like to support more tools like this, consider visiting<a href="https://jeffreymorgenthaler.com/book/" target="_blank"> jeffreymorgenthaler.com</a> and buying a personalized, signed copy of one of my books on cocktails and bartending. There's lots more helpful advice for making drinks in there! <a property="dct:title" rel="cc:attributionURL" href="https://syrupmath.com/">The Universal Syrup Calculator</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jeffreymorgenthaler.com/">Jeffrey Morgenthaler</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</p>
+</footer>
+
     </div>
 
-    <script>
-        function calculate() {
-            const weightInput = document.getElementById('weight');
-            const brixInput = document.getElementById('brix');
-            const weightError = document.getElementById('weightError');
-            const brixError = document.getElementById('brixError');
-            const divider = document.getElementById('divider');
-            const weight = parseFloat(weightInput.value);
-            const brix = parseFloat(brixInput.value);
-            const brixDecimal = brix / 100;
-            const targetBrix2to1 = 2/3;
-            const targetBrix1to1 = 0.5;
-            const brixTolerance = 0.005; // If brix is within 0.5 brix of target, no addition is needed
-            let resultText = '';
-            let additionType = ''; // To store whether we need to add sugar or water
-            let valid = true;
-
-            // Clear previous error messages
-            weightError.textContent = '';
-            brixError.textContent = '';
-
-            if (isNaN(weight) || weight <= 0) {
-                weightError.textContent = 'Please enter a valid weight.';
-                valid = false;
-            }
-            if (isNaN(brix) || brix < 0 || brix > 100) {
-                brixError.textContent = 'Please enter a valid Brix value (0-100).';
-                valid = false;
-            }
-
-            if (!valid) {
-                return;
-            }
-
-            if (isNaN(weight) || isNaN(brixDecimal)) {
-                resultText = 'Please enter valid numbers for weight and Brix.';
-            } else {
-                // For 2:1 Syrup
-                let additionalSugar2to1 = 0;
-                let additionalWater2to1 = 0;
-                if (brixDecimal + brixTolerance < targetBrix2to1) {
-                    additionalSugar2to1 = (targetBrix2to1 * weight - brixDecimal * weight) / (1 - targetBrix2to1);
-                    resultText += `<p>To make a <b>2:1</b> syrup, add <span class="highlight">${additionalSugar2to1.toFixed(2)} grams</span> of sugar.</p>`;
-                    additionType = 'sugar';
-                } else if (brixDecimal - brixTolerance > targetBrix2to1) {
-                    additionalWater2to1 = (brixDecimal * weight - targetBrix2to1 * weight) / targetBrix2to1;
-                    resultText += `<p>To make a <b>2:1</b> syrup, add <span class="highlight">${additionalWater2to1.toFixed(2)} grams</span> of water.</p>`;
-                    additionType = 'water';
-                } else {
-                    resultText += '<p>Your liquid already has the perfect Brix for a <b>2:1</b> syrup.</p>';
-                }
-                // For 1:1 Syrup
-                let additionalSugar1to1 = 0;
-                let additionalWater1to1 = 0;
-                if (brixDecimal + brixTolerance < targetBrix1to1) {
-                    additionalSugar1to1 = (targetBrix1to1 * weight - brixDecimal * weight) / (1 - targetBrix1to1);
-                    resultText += `<p>To make a <b>1:1</b> syrup, add <span class="highlight">${additionalSugar1to1.toFixed(2)} grams</span> of sugar.</p>`;
-                    additionType = 'sugar';
-                } else if (brixDecimal - brixTolerance > targetBrix1to1) {
-                    additionalWater1to1 = (brixDecimal * weight - targetBrix1to1 * weight) / targetBrix1to1;
-                    resultText += `<p>To make a <b>1:1</b> syrup, add <span class="highlight">${additionalWater1to1.toFixed(2)} grams</span> of water.</p>`;
-                    additionType = 'water';
-                } else {
-                    resultText += '<p>Your liquid already has the perfect Brix for a <b>1:1</b> syrup.</p>';
-                }
-
-                // Add contextualized instructions based on the addition type
-                if (additionType === 'sugar') {
-                    resultText += '<p><em>Heat your liquid and the additional sugar over gentle heat and stir until everything is combined.</em></p>';
-                } else if (additionType === 'water') {
-                    resultText += '<p><em>Heat your liquid and the additional water over gentle heat and stir until everything is combined.</em></p>';
-                }
-
-                resultText += '<p><em>Allow mixture to cool, store in <a href="https://amzn.to/3Sd2092" target="_blank" aria-label="Link to buy, opens in a new window">squeeze bottles</a>, label and refrigerate.</em></p>';
-            }
-
-            document.getElementById('result').innerHTML = resultText;
-            divider.style.display = 'block'; // Show the divider after displaying results
-        }
-
-        // Add event listener to trigger the calculate function when Enter key is pressed
-        document.getElementById('weight').addEventListener('keydown', function(event) {
-            if (event.key === 'Enter') {
-                document.getElementById('calculateButton').click();
-            }
-        });
-
-        document.getElementById('brix').addEventListener('keydown', function(event) {
-            if (event.key === 'Enter') {
-                document.getElementById('calculateButton').click();
-            }
-        });
-    </script>
-
-    <!-- 100% privacy-first analytics -->
-<script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-<noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
+    <!-- Link to external JavaScript file -->
+    <script src="script.js"></script>
     
+    <!-- 100% privacy-first analytics -->
+    <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+    <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
 </body>
 </html>
