@@ -128,7 +128,7 @@ a:hover {
 /* Error message styling */
 .error {
     color: red;
-    font-size: 0.9em;  /* Adjust font size if necessary */
+    font-size: 0.8em;  /* Adjust font size if necessary */
     margin-left: 5px;
     display: block;  /* Ensure it displays as a block element */
 }
