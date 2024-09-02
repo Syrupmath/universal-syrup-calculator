@@ -1,3 +1,29 @@
+document.getElementById('video-trigger').onclick = function(event) {
+  event.preventDefault();
+  var modal = document.getElementById('video-modal');
+  var iframe = document.getElementById('youtube-video');
+  iframe.src = "https://www.youtube.com/embed/glE4A1I0q9I?autoplay=1&mute=1"; // Added mute=1 to ensure autoplay
+  modal.style.display = "block";
+}
+
+document.getElementsByClassName('close')[0].onclick = function() {
+  var modal = document.getElementById('video-modal');
+  var iframe = document.getElementById('youtube-video');
+  iframe.src = ""; // Stop video when modal is closed
+  modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  var modal = document.getElementById('video-modal');
+  if (event.target == modal) {
+    var iframe = document.getElementById('youtube-video');
+    iframe.src = ""; // Stop video when modal is closed
+    modal.style.display = "none";
+  }
+}
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const weightInput = document.getElementById('weight');
     const unitInput = document.getElementById('unit');
