@@ -1,177 +1,168 @@
-document.getElementById('video-trigger').onclick = function(event) {
-  event.preventDefault();
-  var modal = document.getElementById('video-modal');
-  var iframe = document.getElementById('youtube-video');
-  iframe.src = "https://www.youtube.com/embed/glE4A1I0q9I?autoplay=1&mute=1"; // Added mute=1 to ensure autoplay
-  modal.style.display = "block";
+// ── Video modal ──────────────────────────────────────────────
+
+const videoTrigger = document.getElementById('video-trigger');
+const videoModal   = document.getElementById('video-modal');
+const modalClose   = document.getElementById('modal-close');
+const youtubeVideo = document.getElementById('youtube-video');
+
+function openModal() {
+    youtubeVideo.src = 'https://www.youtube.com/embed/glE4A1I0q9I?autoplay=1&mute=1';
+    videoModal.classList.add('open');
 }
 
-document.getElementsByClassName('close')[0].onclick = function() {
-  var modal = document.getElementById('video-modal');
-  var iframe = document.getElementById('youtube-video');
-  iframe.src = ""; // Stop video when modal is closed
-  modal.style.display = "none";
+function closeModal() {
+    youtubeVideo.src = '';
+    videoModal.classList.remove('open');
 }
 
-window.onclick = function(event) {
-  var modal = document.getElementById('video-modal');
-  if (event.target == modal) {
-    var iframe = document.getElementById('youtube-video');
-    iframe.src = ""; // Stop video when modal is closed
-    modal.style.display = "none";
-  }
-}
+videoTrigger.addEventListener('click', function (e) {
+    e.preventDefault();
+    openModal();
+});
+
+modalClose.addEventListener('click', closeModal);
+
+videoModal.addEventListener('click', function (e) {
+    if (e.target === videoModal) closeModal();
+});
+
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && videoModal.classList.contains('open')) closeModal();
+});
 
 
+// ── Calculator ───────────────────────────────────────────────
 
-document.addEventListener('DOMContentLoaded', () => {
-    const weightInput = document.getElementById('weight');
-    const unitInput = document.getElementById('unit');
-    const brixInput = document.getElementById('brix');
-    const weightError = document.getElementById('weightError');
-    const brixError = document.getElementById('brixError');
-    const results = document.getElementById('results');
+document.addEventListener('DOMContentLoaded', function () {
+    const weightInput  = document.getElementById('weight');
+    const unitInput    = document.getElementById('unit');
+    const brixInput    = document.getElementById('brix');
+    const weightError  = document.getElementById('weightError');
+    const brixError    = document.getElementById('brixError');
+    const resultsEl    = document.getElementById('results');
     const instructions = document.getElementById('instructions');
-    
-    function convertToGrams(weight, unit) {
+    const result1to1   = document.getElementById('result-1to1');
+    const result2to1   = document.getElementById('result-2to1');
+
+    const TARGET_1TO1 = 0.5;
+    const TARGET_2TO1 = 2 / 3;
+    const TOLERANCE   = 0.005;
+
+    function toGrams(value, unit) {
         switch (unit) {
-            case 'grams':
-                return weight;
-            case 'ounces':
-                return weight * 28.3495;
-            case 'kilograms':
-                return weight * 1000;
-            case 'pounds':
-                return weight * 453.592;
-            default:
-                return weight;
+            case 'ounces':    return value * 28.3495;
+            case 'kilograms': return value * 1000;
+            case 'pounds':    return value * 453.592;
+            default:          return value; // grams
         }
     }
 
-    function convertFromGrams(weightInGrams, unit) {
+    function fromGrams(grams, unit) {
         switch (unit) {
-            case 'grams':
-                return weightInGrams;
-            case 'ounces':
-                return weightInGrams / 28.3495;
-            case 'kilograms':
-                return weightInGrams / 1000;
-            case 'pounds':
-                return weightInGrams / 453.592;
-            default:
-                return weightInGrams;
+            case 'ounces':    return grams / 28.3495;
+            case 'kilograms': return grams / 1000;
+            case 'pounds':    return grams / 453.592;
+            default:          return grams; // grams
         }
+    }
+
+    function renderResultCard(el, { type, amount, unit }) {
+        if (type === 'perfect') {
+            el.innerHTML = '<p class="result-perfect">Already the right Brix.</p>';
+            return;
+        }
+        const label = type === 'sugar' ? 'sugar' : 'water';
+        el.innerHTML =
+            '<span class="result-action">Add</span>' +
+            '<span class="result-amount">' + amount.toFixed(1) + ' <small>' + unit + '</small></span>' +
+            '<span class="result-ingredient">' + label + '</span>';
+    }
+
+    function buildInstructions(type1, type2) {
+        const needsSugar = type1 === 'sugar' || type2 === 'sugar';
+        const needsWater = type1 === 'water' || type2 === 'water';
+        const bothPerfect = type1 === 'perfect' && type2 === 'perfect';
+
+        let step1 = '';
+        if (bothPerfect) {
+            step1 = '<p>Your liquid is already at the correct Brix — no additions needed.</p>';
+        } else if (needsSugar) {
+            step1 = '<p>Heat your liquid and the additional sugar over gentle heat on a stovetop or in a microwave, stirring just until the sugar is dissolved.</p>';
+        } else if (needsWater) {
+            step1 = '<p>Combine your liquid and the additional water, heating gently if needed, and stir until fully combined.</p>';
+        }
+
+        const step2 = '<p>Allow the mixture to cool at room temperature, then portion into ' +
+            '<a href="https://amzn.to/3XqhJVn" target="_blank">squeeze bottles</a> and clearly ' +
+            '<a href="https://amzn.to/4g10rFD" target="_blank">label and date</a> each one.</p>';
+
+        const step3 = '<p class="shelf-life">Store 1:1 syrups refrigerated for up to 1 month; 2:1 syrups for up to 6 weeks. Check for signs of spoilage before use — when in doubt, discard and start fresh.</p>';
+
+        return step1 + step2 + step3;
     }
 
     function calculate() {
         const weight = parseFloat(weightInput.value);
-        const unit = unitInput.value;
-        const brix = parseFloat(brixInput.value);
-        const brixDecimal = brix / 100;
-        const targetBrix2to1 = 2/3;
-        const targetBrix1to1 = 0.5;
-        const brixTolerance = 0.005;
-        let valid = true;
+        const unit   = unitInput.value;
+        const brix   = parseFloat(brixInput.value);
+        const brixD  = brix / 100;
 
         weightError.textContent = '';
-        brixError.textContent = '';
+        brixError.textContent   = '';
+
+        let valid = true;
 
         if (isNaN(weight) || weight <= 0) {
             weightError.textContent = 'Please enter a valid weight.';
             valid = false;
         }
         if (isNaN(brix) || brix < 0 || brix > 100) {
-            brixError.textContent = 'Please enter a valid Brix value (0-100).';
+            brixError.textContent = 'Please enter a valid Brix value (0–100).';
             valid = false;
         }
 
-        if (!valid) {
-            return;
-        }
+        if (!valid) return;
 
-        const weightInGrams = convertToGrams(weight, unit);
+        const weightG = toGrams(weight, unit);
 
-        if (isNaN(weightInGrams) || isNaN(brixDecimal)) {
-            document.getElementById('result').innerHTML = 'Please enter valid numbers for weight and Brix.';
+        // ── 1:1 ──
+        let type1, amount1 = 0;
+        if (Math.abs(brixD - TARGET_1TO1) <= TOLERANCE) {
+            type1 = 'perfect';
+        } else if (brixD < TARGET_1TO1) {
+            type1   = 'sugar';
+            amount1 = fromGrams((TARGET_1TO1 * weightG - brixD * weightG) / (1 - TARGET_1TO1), unit);
         } else {
-            // 1:1 Syrup Calculation
-            let additionalSugar1to1 = 0;
-            let additionalWater1to1 = 0;
-            let sugar1to1Type = '';
-
-            if (Math.abs(brixDecimal - targetBrix1to1) <= brixTolerance) {
-                sugar1to1Type = 'perfect';
-            } else if (brixDecimal < targetBrix1to1) {
-                additionalSugar1to1 = (targetBrix1to1 * weightInGrams - brixDecimal * weightInGrams) / (1 - targetBrix1to1);
-                additionalSugar1to1 = convertFromGrams(additionalSugar1to1, unit);
-                sugar1to1Type = 'sugar';
-            } else {
-                additionalWater1to1 = (brixDecimal * weightInGrams - targetBrix1to1 * weightInGrams) / targetBrix1to1;
-                additionalWater1to1 = convertFromGrams(additionalWater1to1, unit);
-                sugar1to1Type = 'water';
-            }
-
-            document.getElementById('sugar1to1').innerHTML = sugar1to1Type === 'perfect' 
-                ? 'Your liquid already has the correct Brix for a 1:1 syrup.' 
-                : `<span style="font-size: smaller; color: black;">Add</span><br>` + 
-                  (additionalSugar1to1 || additionalWater1to1).toFixed(2) + ' ' + unit + 
-                  `<br><span style="font-size: smaller; color: black;">${sugar1to1Type}</span>`;
-            document.getElementById('sugar1to1Type').textContent = '';
-
-            // 2:1 Syrup Calculation
-            let additionalSugar2to1 = 0;
-            let additionalWater2to1 = 0;
-            let sugar2to1Type = '';
-
-            if (Math.abs(brixDecimal - targetBrix2to1) <= brixTolerance) {
-                sugar2to1Type = 'perfect';
-            } else if (brixDecimal < targetBrix2to1) {
-                additionalSugar2to1 = (targetBrix2to1 * weightInGrams - brixDecimal * weightInGrams) / (1 - targetBrix2to1);
-                additionalSugar2to1 = convertFromGrams(additionalSugar2to1, unit);
-                sugar2to1Type = 'sugar';
-            } else {
-                additionalWater2to1 = (brixDecimal * weightInGrams - targetBrix2to1 * weightInGrams) / targetBrix2to1;
-                additionalWater2to1 = convertFromGrams(additionalWater2to1, unit);
-                sugar2to1Type = 'water';
-            }
-
-            document.getElementById('sugar2to1').innerHTML = sugar2to1Type === 'perfect' 
-                ? 'Your liquid already has the correct Brix for a 2:1 syrup.' 
-                : `<span style="font-size: smaller; color: black;">Add</span><br>` + 
-                  (additionalSugar2to1 || additionalWater2to1).toFixed(2) + ' ' + unit + 
-                  `<br><span style="font-size: smaller; color: black;">${sugar2to1Type}</span>`;
-            document.getElementById('sugar2to1Type').textContent = '';
-
-            // Show the results and instructions
-            results.classList.remove('d-none');
-            instructions.classList.remove('d-none');
-
-            // Set the contextual instructions based on the type of addition needed
-            let instructionText = '';
-            if (sugar1to1Type === 'sugar' || sugar2to1Type === 'sugar') {
-                instructionText = '<p id="instruction-1">Heat your liquid and the additional sugar over gentle heat on a stovetop or in a microwave, and stir just until the sugar is dissolved and everything is combined.</p>';
-            } else if (sugar1to1Type === 'water' || sugar2to1Type === 'water') {
-                instructionText = '<p id="instruction-1">Heat your liquid and the additional water over gentle heat on a stovetop or in a microwave, and stir just until everything is combined.</p>';
-            } else {
-                instructionText = 'Your liquid already has the correct Brix for the syrup.';
-            }
-            instructionText += '<p id="instruction-2">Allow the mixture to cool at room temperature, then portion into <a href="https://amzn.to/3XqhJVn" target="_blank" aria-label="Link to buy squeeze bottles, opens in a new window">squeeze bottles</a>, and clearly <a href="https://amzn.to/4g10rFD" target="_blank" aria-label="Link to buy food labels, opens in a new window">label and date</a> all bottles.</p>';
-            instructionText += '<p id="instruction-3">Store 1:1 syrups in the refrigerator for up to 1 month and 2:1 syrups for up to 6 weeks. Check for signs of spoilage before use. When in doubt, always discard and make a new batch.</p>';
-            instructions.innerHTML = `<p>${instructionText}</p>`;
+            type1   = 'water';
+            amount1 = fromGrams((brixD * weightG - TARGET_1TO1 * weightG) / TARGET_1TO1, unit);
         }
+
+        // ── 2:1 ──
+        let type2, amount2 = 0;
+        if (Math.abs(brixD - TARGET_2TO1) <= TOLERANCE) {
+            type2 = 'perfect';
+        } else if (brixD < TARGET_2TO1) {
+            type2   = 'sugar';
+            amount2 = fromGrams((TARGET_2TO1 * weightG - brixD * weightG) / (1 - TARGET_2TO1), unit);
+        } else {
+            type2   = 'water';
+            amount2 = fromGrams((brixD * weightG - TARGET_2TO1 * weightG) / TARGET_2TO1, unit);
+        }
+
+        renderResultCard(result1to1, { type: type1, amount: amount1, unit });
+        renderResultCard(result2to1, { type: type2, amount: amount2, unit });
+
+        instructions.innerHTML = buildInstructions(type1, type2);
+
+        resultsEl.classList.add('visible');
+        instructions.classList.add('visible');
     }
 
     document.getElementById('calculateButton').addEventListener('click', calculate);
 
-    weightInput.addEventListener('keydown', function(event) {
-        if (event.key === 'Enter') {
-            calculate();
-        }
-    });
-
-    brixInput.addEventListener('keydown', function(event) {
-        if (event.key === 'Enter') {
-            calculate();
-        }
+    [weightInput, brixInput].forEach(function (input) {
+        input.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') calculate();
+        });
     });
 });
