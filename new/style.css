@@ -1,258 +1,535 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Spicy+Rice&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Spicy+Rice&family=Source+Sans+3:wght@300;400;600&display=swap');
 
-body {
-    font-family: 'Roboto', Arial, sans-serif;
+*, *::before, *::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: #f5ec9a; /* Changed background color */
-    color: #333;
+}
+
+:root {
+    --tomato:      #e8432a;
+    --tomato-dark: #c0351e;
+    --cream:       #fdf6e3;
+    --ink:         #1a1008;
+    --ink-mid:     #3d2e1a;
+    --ink-light:   #7a6650;
+    --rule:        rgba(26, 16, 8, 0.14);
+    --card-bg:     rgba(253, 246, 227, 0.97);
+    --radius:      4px;
+}
+
+/* ── Body & background ── */
+body {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    color: var(--ink);
+    min-height: 100vh;
+    background-color: var(--ink);
+    background-image: url('background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+/* ── Page wrapper (overlay + centering) ── */
+.page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 16px 60px;
+    background: linear-gradient(
+        to bottom,
+        rgba(10, 6, 2, 0.72) 0%,
+        rgba(10, 6, 2, 0.52) 40%,
+        rgba(10, 6, 2, 0.72) 100%
+    );
+}
+
+/* ── Card ── */
+.card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    width: 100%;
+    max-width: 520px;
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.12),
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+}
+
+/* ── Header ── */
+.card-header {
+    padding: 32px 32px 24px;
+    border-bottom: 1px solid var(--rule);
+    text-align: center;
+}
+
+.eyebrow {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 4px;
+}
+
+h1 {
+    font-family: 'Spicy Rice', serif;
+    font-size: clamp(2.6rem, 7vw, 3.4rem);
+    font-weight: 400;
+    line-height: 0.9;
+    color: var(--tomato);
+    margin-bottom: 10px;
+}
+
+.byline {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--ink-light);
+    margin-bottom: 14px;
+}
+
+.byline a {
+    color: var(--ink-light);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.byline a:hover {
+    color: var(--tomato);
+}
+
+.intro {
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: var(--ink-mid);
+    max-width: 400px;
+    margin: 0 auto 12px;
+}
+
+.video-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--tomato);
+    text-decoration: none;
+    transition: opacity 0.15s;
+}
+
+.video-link:hover {
+    opacity: 0.7;
+}
+
+.video-link svg {
+    width: 15px;
+    height: 15px;
+    fill: currentColor;
+}
+
+/* ── Card body ── */
+.card-body {
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* ── Steps ── */
+.step {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.step-label {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.step-num {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--tomato);
+    white-space: nowrap;
+}
+
+.step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+}
+
+.step-desc {
+    font-size: 0.8rem;
     line-height: 1.6;
-	background: url('background.jpg');
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-attachment: fixed;
-	background-position: center;
-
+    color: var(--ink-mid);
 }
 
-.container {
-    width: 95%;
-    max-width: 500px;
-    padding: 20px;
-    margin: 15px auto 5px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.step-desc a {
+    color: var(--tomato);
+    text-decoration: underline;
+    text-underline-offset: 2px;
 }
 
-
-
-
-
-/* The Modal (background) */
-.modal {
-  display: none; 
-  position: fixed; 
-  z-index: 1000; 
-  left: 0;
-  top: 0;
-  width: 100%; 
-  height: 100%; 
-  overflow: auto; 
-  background-color: rgba(0,0,0,0.8); 
+.step-desc a:hover {
+    opacity: 0.75;
 }
 
-/* Modal Content */
-.modal-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 0;
-  width: 80%;
-  max-width: 640px;
-  height: auto;
-  border-radius: 8px;
-  overflow: hidden;
+/* ── Inputs ── */
+.input-row {
+    display: flex;
+    border: 1.5px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.15s, box-shadow 0.15s;
 }
 
-/* Close Button */
-.close {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  color: #aaa;
-  font-size: 24px;
-  font-weight: bold;
-  cursor: pointer;
+.input-row:focus-within {
+    border-color: var(--tomato);
+    box-shadow: 0 0 0 3px rgba(232, 67, 42, 0.12);
 }
 
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+.input-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    background: rgba(26, 16, 8, 0.04);
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    border-right: 1.5px solid var(--rule);
+    white-space: nowrap;
+    min-width: 90px;
 }
 
-/* Responsive video container */
+.input-row input[type="number"] {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--ink);
+    padding: 12px 14px;
+    min-width: 0;
+    -moz-appearance: textfield;
+}
+
+.input-row input[type="number"]::-webkit-outer-spin-button,
+.input-row input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.input-row select {
+    border: none;
+    border-left: 1.5px solid var(--rule);
+    outline: none;
+    background: rgba(26, 16, 8, 0.04);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink-mid);
+    padding: 12px 28px 12px 10px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%237a6650'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+
+.suffix {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink-light);
+    background: rgba(26, 16, 8, 0.04);
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    border-left: 1.5px solid var(--rule);
+}
+
+.error-msg {
+    font-size: 0.72rem;
+    color: var(--tomato);
+    font-weight: 600;
+    min-height: 1em;
+    display: block;
+}
+
+/* ── Calculate button ── */
+.btn-calculate {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: var(--tomato);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+}
+
+.btn-calculate:hover {
+    background: var(--tomato-dark);
+}
+
+.btn-calculate:active {
+    transform: scale(0.99);
+}
+
+/* ── Results ── */
+.results {
+    display: none;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.results.visible {
+    display: flex;
+}
+
+.result-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.result-card {
+    border: 1.5px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-align: center;
+}
+
+.result-card-head {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--ink);
+    padding: 8px 10px;
+}
+
+.result-card-body {
+    padding: 16px 12px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    min-height: 96px;
+    justify-content: center;
+}
+
+.result-action {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+}
+
+.result-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--tomato);
+    line-height: 1;
+}
+
+.result-ingredient {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+}
+
+.result-perfect {
+    font-size: 0.75rem;
+    color: var(--ink-mid);
+    line-height: 1.45;
+    font-style: italic;
+}
+
+/* ── Instructions ── */
+.instructions {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 0.8rem;
+    line-height: 1.65;
+    color: var(--ink-mid);
+}
+
+.instructions.visible {
+    display: flex;
+}
+
+.instructions p {
+    margin: 0;
+}
+
+.instructions a {
+    color: var(--tomato);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.instructions .shelf-life {
+    font-style: italic;
+    color: var(--ink-light);
+    font-size: 0.75rem;
+}
+
+/* ── Divider ── */
+.divider {
+    height: 1px;
+    background: var(--rule);
+    margin: 0 -32px;
+    width: calc(100% + 64px);
+}
+
+/* ── Footer ── */
+.card-footer {
+    padding: 20px 32px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+    font-size: 0.72rem;
+    line-height: 1.6;
+    color: var(--ink-light);
+}
+
+.card-footer a {
+    color: var(--ink-light);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.card-footer a:hover {
+    color: var(--tomato);
+}
+
+.card-footer .license {
+    font-size: 0.68rem;
+    opacity: 0.75;
+}
+
+/* ── Video modal ── */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(10, 6, 2, 0.88);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay.open {
+    display: flex;
+}
+
+.modal-box {
+    position: relative;
+    width: 90%;
+    max-width: 640px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.7);
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    z-index: 10;
+    background: rgba(10, 6, 2, 0.65);
+    border: none;
+    color: #fff;
+    font-size: 1.1rem;
+    line-height: 1;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+}
+
+.modal-close:hover {
+    background: var(--tomato);
+}
+
 .video-container {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
-  height: 0;
-  overflow: hidden;
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
 }
 
 .video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
 }
 
-
-
-
-
-h1 {
-    font-family: "Spicy Rice", serif;
-    font-size: 3.5rem;
-    font-weight: 400;
-    line-height: .8;
-    color: #ff6347;
-    text-align: center;
-    padding: 0;
-    margin: 0;
-}
-
-h2 {
-    font-family: 'Raleway', sans-serif;
-    font-size: 1.3rem; /* Slightly smaller than the default */
-    margin-bottom: 0.75rem; /* Reduce space below the title */
-    font-weight: 800; /* Heavy font weight for a modern look */
-    color: #333; /* A slightly softer black/gray color */
-    letter-spacing: 0.5px; /* Add slight letter spacing for a modern feel */
-    margin: 0;
-}
-
-#header p {
-    font-family: Arial, sans-serif; /* Keep the same font family */
-    font-size: .8rem; /* Slightly smaller font for the byline */
-    font-weight: 400; /* Normal weight for the byline */
-    color: #000; /* Set the text color to black */
-    margin: 0; /* Adjust spacing between title and byline */
-    text-align: center;
-	}
-	
-.recipe-step p {
-    font-size: .75rem;
-    margin-top: 5px;
-	}
-	
-.row .recipe-step h2,
-.row .recipe-step p {
-	margin-left: 15px;
-	margin-right: 15px;
-	}
-	
-.author {
-	padding-bottom: 15px;
-	}
-
-a {
-    color: #007BFF;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-.highlight {
-    color: red;
-    font-weight: bold;
-}
-
-.input-group {
-    margin-bottom: 5px;
-    padding-bottom: 0px;
-}
-
-#calculateButton {
-    background-color: #007bff;
-    border-color: #007bff;
-    padding: 10px 20px;
-    font-size: 18px;
-    transition: background-color 0.3s ease;
-    margin-top: 25px;
-}
-
-#calculateButton:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
-}
-
-#results {
-    margin-top: 1.5em; /* Adjust the value as needed */
-    margin-bottom: 1.5em;
-}
-
-.card-header {
-    font-size: 1rem;  /* Increase the font size */
-    letter-spacing: 1px;
-    font-weight: 900; /* Make the text bold */
-}
-
-#sugar1to1, #sugar2to1 {
-	font-size: 1.5rem;
-	color: #ff6347;
-	margin-bottom: 1rem;
-	}
-	
-#instruction-1 {
-    font-family: Arial, sans-serif; /* Keep the same font family */
-    font-size: .9rem;
-    font-weight: 400;
-    color: #000; /* Set the text color to black */
-    text-align: center;
-	}
-	
-#instruction-2 {
-    font-family: Arial, sans-serif; /* Keep the same font family */
-    font-size: .9rem;
-    font-weight: 600;
-    color: #000; /* Set the text color to black */
-    text-align: center;
-	}
-	
-#instruction-3 {
-    font-family: Arial, sans-serif; /* Keep the same font family */
-    font-size: .9rem;
-    font-weight: 400;
-    font-style: italic;
-    color: #000; /* Set the text color to black */
-    text-align: center;
-	}
-
-/* Error message styling */
-.error {
-    color: red;
-    font-size: 0.8em;  /* Adjust font size if necessary */
-    margin-left: 5px;
-    display: block;  /* Ensure it displays as a block element */
-}
-
-hr {
-    margin: 2rem 0;
-}
-
-footer {
-    text-align: center;
-    font-family: Arial, sans-serif; /* Keep the same font family */
-    font-size: .8rem; /* Slightly smaller font for the byline */
-    font-weight: 400; /* Normal weight for the byline */
-    color: #000; /* Set the text color to black */
+/* ── Mobile ── */
+@media (max-width: 560px) {
+    .page {
+        padding: 20px 10px 48px;
     }
 
-/* Remove border and margins, adjust width and padding on mobile devices */
-@media (max-width: 768px) {
-    .container {
-        width: 95%; /* Ensure the container takes up 90% of the width */
-        max-width: none; /* Remove max-width for mobile */
-        padding: 15px; /* Reduce padding on mobile devices
-        border: none;
-        margin: 10px auto; /* Center the container with auto margins */
-        border-radius: 5px;
-    }
-    
-.card {
-	margin-bottom: 25px; /* Add desired space between cards */
+    .card-header,
+    .card-body,
+    .card-footer {
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
+    .divider {
+        margin: 0 -20px;
+        width: calc(100% + 40px);
+    }
+
+    .result-amount {
+        font-size: 1.4rem;
+    }
+
+    .input-label {
+        min-width: 72px;
+        font-size: 0.62rem;
+    }
 }
