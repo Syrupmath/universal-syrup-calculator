@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Spicy+Rice&family=Source+Sans+3:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=VT323&family=Source+Sans+3:wght@300;400;600&display=swap');
 
 *, *::before, *::after {
     box-sizing: border-box;
@@ -7,19 +7,19 @@
 }
 
 :root {
-    --tomato:        #e8432a;
-    --tomato-dark:   #c0351e;
-    --tomato-glow:   rgba(232, 67, 42, 0.18);
-    --card-bg:       #111009;
-    --card-surface:  #1c1810;
-    --card-raised:   #252018;
-    --border:        rgba(255, 255, 255, 0.09);
-    --border-strong: rgba(255, 255, 255, 0.15);
-    --text-primary:  #f0e8d8;
-    --text-secondary:#a89880;
-    --text-dim:      #6a5c4a;
-    --gold:          #d4a843;
-    --blue:          #5baad4;
+    --tomato:        #d93d24;
+    --tomato-dark:   #b5311b;
+    --tomato-glow:   rgba(217, 61, 36, 0.14);
+    --card-bg:       #f7f2ea;
+    --card-surface:  #ede7dc;
+    --card-raised:   #e4ddd1;
+    --border:        rgba(60, 40, 20, 0.12);
+    --border-strong: rgba(60, 40, 20, 0.2);
+    --text-primary:  #1e1508;
+    --text-secondary:#4a3b28;
+    --text-dim:      #8a7560;
+    --gold:          #a07c1a;
+    --blue:          #2a7eaa;
     --radius:        6px;
     --radius-lg:     10px;
 }
@@ -84,10 +84,11 @@ body {
 }
 
 h1 {
-    font-family: 'Spicy Rice', serif;
-    font-size: clamp(2.8rem, 7vw, 3.6rem);
+    font-family: 'VT323', monospace;
+    font-size: clamp(3.2rem, 9vw, 4.4rem);
     font-weight: 400;
-    line-height: 0.88;
+    line-height: 0.92;
+    letter-spacing: 0.04em;
     color: var(--tomato);
     margin-bottom: 12px;
 }
@@ -253,7 +254,7 @@ h1 {
     cursor: pointer;
     appearance: none;
     -webkit-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236a5c4a'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a7560'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 10px center;
     min-width: 90px;
@@ -336,8 +337,8 @@ h1 {
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--text-dim);
-    background: var(--card-raised);
+    color: #fff;
+    background: var(--tomato);
     padding: 9px 10px;
     border-bottom: 1px solid var(--border);
 }
