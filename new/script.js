@@ -1,3 +1,24 @@
+// ── Icons ────────────────────────────────────────────────────
+
+// Crystal / gem icon for sugar
+const ICON_SUGAR = `
+<svg class="result-icon sugar" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <polygon points="19,3 35,13 35,25 19,35 3,25 3,13" fill="currentColor" fill-opacity="0.15" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+  <polygon points="19,3 35,13 19,16 3,13" fill="currentColor" fill-opacity="0.25" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+  <line x1="19" y1="3" x2="19" y2="16" stroke="currentColor" stroke-width="1.2"/>
+  <line x1="19" y1="16" x2="3" y2="13" stroke="currentColor" stroke-width="1"/>
+  <line x1="19" y1="16" x2="35" y2="13" stroke="currentColor" stroke-width="1"/>
+  <line x1="19" y1="16" x2="19" y2="35" stroke="currentColor" stroke-width="1.2"/>
+</svg>`.trim();
+
+// Droplet icon for water
+const ICON_WATER = `
+<svg class="result-icon water" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path d="M19 4 C19 4 6 18 6 25 C6 31.6 12 36 19 36 C26 36 32 31.6 32 25 C32 18 19 4 19 4Z" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+  <path d="M13 27 C13 27 12 23 16 20" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.5"/>
+</svg>`.trim();
+
+
 // ── Video modal ──────────────────────────────────────────────
 
 const videoTrigger = document.getElementById('video-trigger');
@@ -53,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
             case 'ounces':    return value * 28.3495;
             case 'kilograms': return value * 1000;
             case 'pounds':    return value * 453.592;
-            default:          return value; // grams
+            default:          return value;
         }
     }
 
@@ -62,25 +83,29 @@ document.addEventListener('DOMContentLoaded', function () {
             case 'ounces':    return grams / 28.3495;
             case 'kilograms': return grams / 1000;
             case 'pounds':    return grams / 453.592;
-            default:          return grams; // grams
+            default:          return grams;
         }
     }
 
     function renderResultCard(el, { type, amount, unit }) {
         if (type === 'perfect') {
-            el.innerHTML = '<p class="result-perfect">Already the right Brix.</p>';
+            el.innerHTML = '<p class="result-perfect">Already the correct Brix.</p>';
             return;
         }
-        const label = type === 'sugar' ? 'sugar' : 'water';
+
+        const isSugar = type === 'sugar';
+        const icon    = isSugar ? ICON_SUGAR : ICON_WATER;
+        const label   = isSugar ? 'sugar' : 'water';
+
         el.innerHTML =
+            icon +
             '<span class="result-action">Add</span>' +
             '<span class="result-amount">' + amount.toFixed(1) + ' <small>' + unit + '</small></span>' +
-            '<span class="result-ingredient">' + label + '</span>';
+            '<span class="result-ingredient ' + type + '">' + label + '</span>';
     }
 
     function buildInstructions(type1, type2) {
-        const needsSugar = type1 === 'sugar' || type2 === 'sugar';
-        const needsWater = type1 === 'water' || type2 === 'water';
+        const needsSugar  = type1 === 'sugar'  || type2 === 'sugar';
         const bothPerfect = type1 === 'perfect' && type2 === 'perfect';
 
         let step1 = '';
@@ -88,15 +113,18 @@ document.addEventListener('DOMContentLoaded', function () {
             step1 = '<p>Your liquid is already at the correct Brix — no additions needed.</p>';
         } else if (needsSugar) {
             step1 = '<p>Heat your liquid and the additional sugar over gentle heat on a stovetop or in a microwave, stirring just until the sugar is dissolved.</p>';
-        } else if (needsWater) {
+        } else {
             step1 = '<p>Combine your liquid and the additional water, heating gently if needed, and stir until fully combined.</p>';
         }
 
-        const step2 = '<p>Allow the mixture to cool at room temperature, then portion into ' +
+        const step2 =
+            '<p>Allow the mixture to cool at room temperature, then portion into ' +
             '<a href="https://amzn.to/3XqhJVn" target="_blank">squeeze bottles</a> and clearly ' +
             '<a href="https://amzn.to/4g10rFD" target="_blank">label and date</a> each one.</p>';
 
-        const step3 = '<p class="shelf-life">Store 1:1 syrups refrigerated for up to 1 month; 2:1 syrups for up to 6 weeks. Check for signs of spoilage before use — when in doubt, discard and start fresh.</p>';
+        const step3 =
+            '<p class="shelf-life">Store 1:1 syrups refrigerated for up to 1 month; 2:1 syrups for up to 6 weeks. ' +
+            'Check for signs of spoilage before use — when in doubt, discard and make a fresh batch.</p>';
 
         return step1 + step2 + step3;
     }
@@ -125,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const weightG = toGrams(weight, unit);
 
-        // ── 1:1 ──
+        // 1:1
         let type1, amount1 = 0;
         if (Math.abs(brixD - TARGET_1TO1) <= TOLERANCE) {
             type1 = 'perfect';
@@ -137,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
             amount1 = fromGrams((brixD * weightG - TARGET_1TO1 * weightG) / TARGET_1TO1, unit);
         }
 
-        // ── 2:1 ──
+        // 2:1
         let type2, amount2 = 0;
         if (Math.abs(brixD - TARGET_2TO1) <= TOLERANCE) {
             type2 = 'perfect';
